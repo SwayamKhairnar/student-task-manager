@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Task Manager</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 20px; background: #f5f5f5; }
+        h1 { color: #333; text-align: center; }
+        .task-input { display: flex; gap: 10px; margin-bottom: 20px; }
+        .task-input input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+        .task-input button { padding: 10px 20px; background: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        ul { list-style: none; padding: 0; }
+        li { background: white; padding: 12px; margin-bottom: 8px; border-radius: 5px; display: flex; justify-content: space-between; align-items: center; }
+        li button { background: #f44336; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Student Task Manager</h1>
+    <div class="task-input">
+        <input type="text" id="taskInput" placeholder="Enter a new task...">
+        <button onclick="addTask()">Add Task</button>
+    </div>
+    <ul id="taskList"></ul>
+    <script>
+        function addTask() {
+            const input = document.getElementById('taskInput');
+            const task = input.value.trim();
+            if (task) {
+                const li = document.createElement('li');
+                li.innerHTML = task + ' <button onclick="this.parentElement.remove()">Delete</button>';
+                document.getElementById('taskList').appendChild(li);
+                input.value = '';
+            }
+        }
+    </script>
+</body>
+</html>

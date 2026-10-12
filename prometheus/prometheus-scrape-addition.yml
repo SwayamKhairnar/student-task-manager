@@ -1,0 +1,22 @@
+# -----------------------------------------------------------------------------
+# ADD THIS SCRAPE JOB to /etc/prometheus/prometheus.yml on the Ubuntu VM
+# (append it inside the existing scrape_configs: list)
+# -----------------------------------------------------------------------------
+#
+# After editing, reload Prometheus:
+#   sudo systemctl restart prometheus
+#
+# The target IP (host.lima-internal / host.docker.internal / Mac host IP)
+# depends on how OrbStack / Minikube expose services. See SETUP.md step 7.
+# -----------------------------------------------------------------------------
+
+  - job_name: 'task-manager'
+    scrape_interval: 5s
+    metrics_path: /metrics
+    static_configs:
+      # Replace <MAC_IP> with the IP shown by `minikube ip` (run on Mac host).
+      # Minikube's nodePort 30080 is reachable from the Ubuntu VM via the Mac host IP.
+      - targets: ['<MAC_IP>:30080']
+        labels:
+          service: 'student-task-manager'
+          environment: 'cie-demo'
